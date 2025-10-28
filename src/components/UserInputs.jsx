@@ -15,6 +15,34 @@ function UserInputs() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
+//create state for using resume details
+ 
+ const [resumeDetails,setResumedetails]= React.useState({
+    username:"",
+    jobTitle:"",
+    location:"",
+    email:"",
+    mobile:"",
+    github:"",
+    linkedin:"",
+    portfolio:"",
+    course:"",
+    collage:"",
+    university:"",
+    passoutYear:"",
+    jobType:"",
+    company:"",
+    cLocation:"",
+    duration:"",
+    userSkills:[],
+    summary:""
+
+ })
+ console.log(resumeDetails);
+ 
+
+
+
     const isStepOptional = (step) => {
         return step === 1;
     };
@@ -63,9 +91,9 @@ function UserInputs() {
                 <div>
                     <h3> personal Details</h3>
                     <div className='row p-3' >
-                        <TextField id="standard-basic" label="Full Name" variant="standard" />
-                        <TextField id="standard-basic" label="Job titles" variant="standard" />
-                        <TextField id="standard-basic" label="Location" variant="standard" />
+                        <TextField value={resumeDetails.username} onChange={e=>setResumedetails({...resumeDetails,username:e.target.value})} id="standard-basic" label="Full Name" variant="standard" />
+                        <TextField value={resumeDetails.jobTitle}  onChange={e=>setResumedetails({...resumeDetails,jobTitle:e.target.value})} id="standard-basic" label="Job titles" variant="standard" />
+                        <TextField value={resumeDetails.location} onChange={e=>setResumedetails({...resumeDetails,location:e.target.value})} id="standard-basic" label="Location" variant="standard" />
                     </div>
 
                 </div>
@@ -74,11 +102,11 @@ function UserInputs() {
                 <div>
                     <h3> Contact Details</h3>
                     <div className='row p-3' >
-                        <TextField id="standard-basic" label="Email" variant="standard" />
-                        <TextField id="standard-basic" label="Phone Number" variant="standard" />
-                        <TextField id="standard-basic" label="Github Profile Link" variant="standard" />
-                        <TextField id="standard-basic" label="Linkedin Profile Link" variant="standard" />
-                        <TextField id="standard-basic" label="Portfolio Link" variant="standard" />
+                        <TextField value={resumeDetails.email} onChange={e=>setResumedetails({...resumeDetails,email:e.target.value})} id="standard-basic" label="Email" variant="standard" />
+                        <TextField value={resumeDetails.mobile} onChange={e=>setResumedetails({...resumeDetails,mobile:e.target.value})} id="standard-basic" label="Phone Number" variant="standard" />
+                        <TextField value={resumeDetails.github} onChange={e=>setResumedetails({...resumeDetails,github:e.target.value})} id="standard-basic" label="Github Profile Link" variant="standard" />
+                        <TextField value={resumeDetails.linkedin} onChange={e=>setResumedetails({...resumeDetails,linkedin:e.target.value})} id="standard-basic" label="Linkedin Profile Link" variant="standard" />
+                        <TextField value={resumeDetails.portfolio} onChange={e=>setResumedetails({...resumeDetails,portfolio:e.target.value})} id="standard-basic" label="Portfolio Link" variant="standard" />
                     </div>
                 </div>
             )
@@ -86,10 +114,10 @@ function UserInputs() {
                 <div>
                     <h3> Education Details</h3>
                     <div className='row p-3' >
-                        <TextField id="standard-basic" label="Course Name" variant="standard" />
-                        <TextField id="standard-basic" label="College Name" variant="standard" />
-                        <TextField id="standard-basic" label="University" variant="standard" />
-                        <TextField id="standard-basic" label="Year of Passout" variant="standard" />
+                        <TextField value={resumeDetails.course} onChange={e=>setResumedetails({...resumeDetails,course:e.target.value})} id="standard-basic" label="Course Name" variant="standard" />
+                        <TextField value={resumeDetails.collage} onChange={e=>setResumedetails({...resumeDetails,collage:e.target.value})} id="standard-basic" label="College Name" variant="standard" />
+                        <TextField value={resumeDetails.university} onChange={e=>setResumedetails({...resumeDetails,university:e.target.value})} id="standard-basic" label="University" variant="standard" />
+                        <TextField value={resumeDetails.passoutYear} onChange={e=>setResumedetails({...resumeDetails,passoutYear:e.target.value})} id="standard-basic" label="Year of Passout" variant="standard" />
                     </div>
                 </div>
             )
@@ -97,10 +125,10 @@ function UserInputs() {
                 <div>
                     <h3>Professional Details</h3>
                     <div className='row p-3' >
-                        <TextField id="standard-basic" label="job or Internship" variant="standard" />
-                        <TextField id="standard-basic" label="Company Name" variant="standard" />
-                        <TextField id="standard-basic" label="Company Location" variant="standard" />
-                        <TextField id="standard-basic" label="Duration" variant="standard" />
+                        <TextField value={resumeDetails.jobType} onChange={e=>setResumedetails({...resumeDetails,jobType:e.target.value})} id="standard-basic" label="job or Internship" variant="standard" />
+                        <TextField value={resumeDetails.company} onChange={e=>setResumedetails({...resumeDetails,company:e.target.value})} id="standard-basic" label="Company Name" variant="standard" />
+                        <TextField value={resumeDetails.cLocation} onChange={e=>setResumedetails({...resumeDetails,cLocation:e.target.value})} id="standard-basic" label="Company Location" variant="standard" />
+                        <TextField value={resumeDetails.duration} onChange={e=>setResumedetails({...resumeDetails,duration:e.target.value})} id="standard-basic" label="Duration" variant="standard" />
                     </div>
                 </div>
             )
@@ -131,7 +159,7 @@ function UserInputs() {
                 <div>
                     <h3>  Summary</h3>
                     <div className="p-3 row">
-                       <TextField id="standard-basic-summary" label="write a short summary of yourself" variant="standard" multiline rows={3} defaultValue={'Enthusiastic and detail-oriented MERN Stack Developer with hands-on experience in building dynamic and responsive web applications using MongoDB, Express.js, React.js, and Node.js. Skilled in designing RESTful APIs, developing reusable React components, and managing state efficiently. Adept at integrating front-end interfaces with back-end services and ensuring seamless user experiences. Passionate about writing clean, maintainable code and continuously learning new technologies to enhance application performance.'} />
+                       <TextField onChange={e=>setResumedetails({...resumeDetails,summary:e.target.value})} id="standard-basic-summary" label="write a short summary of yourself" variant="standard" multiline rows={3} defaultValue={'Enthusiastic and detail-oriented MERN Stack Developer with hands-on experience in building dynamic and responsive web applications using MongoDB, Express.js, React.js, and Node.js. Skilled in designing RESTful APIs, developing reusable React components, and managing state efficiently. Adept at integrating front-end interfaces with back-end services and ensuring seamless user experiences. Passionate about writing clean, maintainable code and continuously learning new technologies to enhance application performance.'} />
 
                     </div>
                 </div>
