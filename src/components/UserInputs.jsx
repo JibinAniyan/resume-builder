@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import { FaXmark } from "react-icons/fa6";
 
 
+
 const steps = ['basic Information', 'Contact Details', 'Educational Details', 'Work Experience', 'Skills and Certifications', 'Review & Submit'];
 function UserInputs() {
     const skillSuggestionArray = ['NODE JS', 'REACT', 'MONGODB', 'ANGULAR', 'EXPRESS JS', 'COMMUNICATION', 'COACHING', 'POWER BI']
@@ -38,6 +39,10 @@ function UserInputs() {
     summary:""
 
  })
+
+//reference to skill input tag 
+const skillRef = React.useRef()
+
  console.log(resumeDetails);
  
 
@@ -84,6 +89,25 @@ function UserInputs() {
     const handleReset = () => {
         setActiveStep(0);
     };
+
+    // Adding skils
+
+        const addSkill = (skill)=>{
+            if (resumeDetails.userSkills.includes(skill)) {
+                alert("The Given Skill already added, Please add another!!!")
+            }else{
+                setResumedetails({...resumeDetails,userSkills:[...resumeDetails.userSkills,skill]})
+                //to clear add skill to text
+                skillRef.current.value = ""
+            }
+        }
+
+    // Removing SKills
+
+       const removeSkill = (skill)=>{
+        setResumedetails({...resumeDetails,userSkills:resumeDetails.userSkills.filter(item=>item!=skill)})
+       }
+
 
     const renderSteps = (stepCounts) => {
         switch (stepCounts) {
@@ -136,22 +160,30 @@ function UserInputs() {
                 <div>
                     <h3>Skills</h3>
                     <div className='d-flex align-items-center justify-content-between'>
-                        <input placeholder='Add Skills' type="text" className='form-control' />
-                        <Button variant='text'>ADD</Button>
+                        <input ref={skillRef} placeholder='Add Skills' type="text" className='form-control' />
+                        <Button onClick={()=>addSkill(skillRef.current.value)} variant='text'>ADD</Button>
                     </div>
                     <h3>Suggestion</h3>
                     <div className='d-flex flex-wrap justify-content-between my-3'>
                         {
                             skillSuggestionArray.map((item, index) => (
-                                <Button key={index} variant='outlined' className='m-2'>{item}</Button>
+                                <Button onClick={()=>addSkill(item)} key={index} variant='outlined' className='m-2'>{item}</Button>
 
                             ))
                         }
 
                     </div>
                     <h5>Added Skills:</h5>
-                    <div className='d-flex flex-wrap justify-content-between my-3'>
-                        <Button variant='contained' className='m-1'>NODE JS  <FaXmark className='ms-2' /></Button>
+                    <div className='d-flex flex-wrap justify-content-center my-3'>
+                        {
+                            resumeDetails.userSkills?.length>0?
+                            resumeDetails.userSkills?.map((skill,index)=>(
+                            <Button variant='contained' className='m-1'>{skill} <FaXmark onClick={()=>removeSkill(skill)} className='ms-2' /></Button>
+
+                            ))
+                            :
+                            <p className='fw-bold'>No Skills are added yet!!!</p>
+                        }
                     </div>
                 </div>
             )
