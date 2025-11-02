@@ -11,34 +11,12 @@ import { FaXmark } from "react-icons/fa6";
 
 
 const steps = ['basic Information', 'Contact Details', 'Educational Details', 'Work Experience', 'Skills and Certifications', 'Review & Submit'];
-function UserInputs() {
+function UserInputs({resumeDetails,setResumedetails}) {
     const skillSuggestionArray = ['NODE JS', 'REACT', 'MONGODB', 'ANGULAR', 'EXPRESS JS', 'COMMUNICATION', 'COACHING', 'POWER BI']
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
-//create state for using resume details
- 
- const [resumeDetails,setResumedetails]= React.useState({
-    username:"",
-    jobTitle:"",
-    location:"",
-    email:"",
-    mobile:"",
-    github:"",
-    linkedin:"",
-    portfolio:"",
-    course:"",
-    collage:"",
-    university:"",
-    passoutYear:"",
-    jobType:"",
-    company:"",
-    cLocation:"",
-    duration:"",
-    userSkills:[],
-    summary:""
 
- })
 
 //reference to skill input tag 
 const skillRef = React.useRef()
