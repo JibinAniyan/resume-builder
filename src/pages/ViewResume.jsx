@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Preview from '../components/Preview'
-import { getResumeAPI } from '../services/allAPI'
+import { addHistoryAPI, getResumeAPI } from '../services/allAPI'
 import { Link, useParams } from 'react-router-dom'
 import { FaDownload } from "react-icons/fa";
 import { IoIosRefreshCircle } from "react-icons/io";
@@ -43,15 +43,33 @@ function ViewResume() {
 
     //convert canvas to image
     const resumeImg = canvas.toDataURL('image/png')
-    console.log(resumeImg);
+    // console.log(resumeImg);
     
     //add scrnsht to pdf
-    const imgWidth = doc.internal.pageSize.getWidth()
-    const imgHeight = doc.internal.pageSize.getHeight()
+    const pageWidth = doc.internal.pageSize.getWidth()
+    // const imgHeight = doc.internal.pageSize.getHeight()
+    const imgWidth = pageWidth-20
+    const imgHeight = canvas.height*imgWidth/canvas.width
     doc.addImage(resumeImg,'PNG',0,0,imgWidth,imgHeight)
 
     //download pdf
-    doc.save('resume.pdf')
+    doc.save(`${resume.username}-resume.pdf`)
+    //local time data = new Data
+    const localTimeData = new Date()
+    console.log(localTimeData);
+    const timeStamp =` ${localTimeData.toLocaleDateString()},${localTimeData.toLocaleDateString()} `
+
+    // console.log(timeStamp);
+    try{
+      await addHistoryAPI({timeStamp,resumeImg})
+
+    }catch(err){
+      console.log(err);
+      
+
+    }
+    
+    
 
   }
   return (
