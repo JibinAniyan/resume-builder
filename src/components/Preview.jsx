@@ -32,7 +32,7 @@ function Preview({resumeDetails}) {
         <div className='d-flex flex-wrap justify-content-between my-3'>
           {
             resumeDetails?.userSkills?.map((item,index)=>(
-           <Button key={index} variant='contained' className='m-1'>{item} </Button>
+           <Button key={index } variant='contained' className='m-1'>{item} </Button>
 
             ))
           }

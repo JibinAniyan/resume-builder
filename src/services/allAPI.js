@@ -19,4 +19,13 @@ export const updateResumeAPI = async(id,resume)=>{
 export const addHistoryAPI = async(history)=>{
     return await commonAPI(`${ServerURL}/history`,"POST",history)
 }
-//get history api
+//get history api-called from history components ,when the page load , inside useEffect hook
+
+export const getHistoryAPI = async () => {
+  return await commonAPI(`${ServerURL}/history`, "GET", {});
+};
+
+//remove history api
+export const removeHistoryAPI  = async (id) => {
+  return await commonAPI(`${ServerURL}/history/${id}`, "DELETe", {});
+};

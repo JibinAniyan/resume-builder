@@ -57,7 +57,7 @@ function ViewResume() {
     //local time data = new Data
     const localTimeData = new Date()
     console.log(localTimeData);
-    const timeStamp =` ${localTimeData.toLocaleDateString()},${localTimeData.toLocaleDateString()} `
+    const timeStamp =` ${localTimeData.toLocaleDateString()},${localTimeData.toLocaleTimeString()} `
 
     // console.log(timeStamp);
     try{
@@ -65,11 +65,12 @@ function ViewResume() {
 
     }catch(err){
       console.log(err);
-      
+        
 
     }
     
     
+
 
   }
   return (
